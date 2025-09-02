@@ -1,0 +1,52 @@
+{
+  "name": "laptop-charger-wholesaler-pro",
+  "version": "2.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "init-db": "node server/initDb.js",
+    "server": "node server/server.js",
+    "local": "npm run init-db && concurrently \"npm run server\" \"npm start\""
+  },
+  "keywords": [
+    "laptop-charger",
+    "wholesale",
+    "inventory",
+    "billing",
+    "management",
+    "desktop",
+    "electron"
+  ],
+  "author": "Inventory Management Team",
+  "license": "ISC",
+  "description": "Professional laptop charger wholesale management system with advanced inventory and billing features",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "overrides": {
+    "nth-check": ">=2.0.1",
+    "postcss": ">=8.4.31",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

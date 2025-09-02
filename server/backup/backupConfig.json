@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "schedule": "0 2 * * *",
+  "keepLocalCopies": 5,
+  "keepCloudCopies": 10,
+  "folderName": "Inventory_Backups",
+  "compressBackups": true
+}
