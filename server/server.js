@@ -9,7 +9,7 @@ dotenv.config();
 require('./database');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT;
 
 // // Now go to build folder and now go to index.html
 
