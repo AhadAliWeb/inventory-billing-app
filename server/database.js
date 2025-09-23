@@ -4,7 +4,7 @@ dotenv.config()
 
 // MongoDB connection string
 // add local mongodb uri here
-const MONGODB_URI = process.env.MONGODB_URI 
+const MONGODB_URI = process.env.MONGO_URI 
 
 // 'mongodb+srv://danielsmith4hd:Qw4hddqcrg@art.v75zq7w.mongodb.net/inventory_billing_db?retryWrites=true&w=majority';
 
