@@ -3,13 +3,16 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // Initialize MongoDB connection
 require('./database');
 
 const app = express();
 const port = process.env.PORT;
+
+console.log(__dirname)
+
 
 // // Now go to build folder and now go to index.html
 
