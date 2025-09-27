@@ -11,7 +11,6 @@ require('./database');
 const app = express();
 const port = process.env.PORT;
 
-console.log(__dirname)
 
 
 // // Now go to build folder and now go to index.html
