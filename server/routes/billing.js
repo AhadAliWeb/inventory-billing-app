@@ -34,6 +34,9 @@ router.get('/test', (req, res) => {
 
 // Create a new bill
 router.post('/', requireAuth, validateBill, handleValidation, async (req, res) => {
+
+  console.log(req.body)
+
   try {
     const { 
       customer_id, 

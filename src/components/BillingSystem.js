@@ -197,7 +197,7 @@ const BillingSystem = () => {
   };
 
   const getSubtotal = () => {
-    return cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+    return cart.reduce((sum, item) => sum + (item.quantity * item.selling_price), 0);
   };
 
   const getDiscount = () => {
@@ -221,10 +221,12 @@ const BillingSystem = () => {
     try {
       const response = await fetch('/api/billing?limit=50', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
       });
       const data = await response.json();
+
+
       if (data.bills) {
         setBillHistory(data.bills);
         // Extract recent items from bill history
@@ -240,6 +242,9 @@ const BillingSystem = () => {
       console.error('Error loading bill history:', error);
     }
   };
+
+  console.log(items)
+
 
   // Quick actions for faster billing
   const addItemToCart = async (item, quantity = 1) => {
@@ -709,7 +714,7 @@ const BillingSystem = () => {
                         disabled={item.quantity === 0}
                       >
                         <span className="item-name">{item.name}</span>
-                        <span className="item-price">{formatCurrency(item.price)}</span>
+                        <span className="item-price">{formatCurrency(item.selling_price)}</span>
                       </button>
                     ) : null;
                   })}
@@ -732,7 +737,7 @@ const BillingSystem = () => {
                       <p className="item-stock">Stock: {item.quantity} units</p>
                     </div>
                     <div className="item-price">
-                      <span className="price">{formatCurrency(item.price)}</span>
+                      <span className="price">{formatCurrency(item.selling_price)}</span>
                       <button className="add-btn" disabled={item.quantity === 0}>
                         {item.quantity === 0 ? (
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1119,8 +1124,8 @@ const BillingSystem = () => {
                           <small>{item.category}</small>
                         </td>
                         <td>{item.quantity}</td>
-                        <td>{formatCurrency(item.price)}</td>
-                        <td>{formatCurrency(item.quantity * item.price)}</td>
+                        <td>{formatCurrency(item.selling_price)}</td>
+                        <td>{formatCurrency(item.quantity * item.selling_price)}</td>
                       </tr>
                     ))}
                   </tbody>
