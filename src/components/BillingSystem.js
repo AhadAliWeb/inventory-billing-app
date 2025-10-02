@@ -243,7 +243,8 @@ const BillingSystem = () => {
     }
   };
 
-  console.log(items)
+  console.log(customers)
+  console.log(customerId)
 
 
   // Quick actions for faster billing
@@ -323,13 +324,20 @@ const BillingSystem = () => {
     setLoading(true);
     try {
       const billItems = cart.map(item => ({
-        item_id: item.id,
+        // item_id: item.id,
+        // Mine
+        item_id: item._id,
         quantity: item.quantity,
-        unit_price: item.price
+        // unit_price: item.price
+        // Mine
+        unit_price: item.selling_price
+        
       }));
 
       const billData = {
-        customer_id: parseInt(customerId),
+        // customer_id: parseInt(customerId),
+        // Mine
+        customer_id: customerId,
         total_amount: getTotal(),
         discount: getDiscount(),
         tax: getTax(),
@@ -770,7 +778,8 @@ const BillingSystem = () => {
                 >
                   <option value="">Select Customer</option>
                   {customers.map(c => (
-                    <option key={c.id} value={c.id}>
+                    // Mine => Changing from c.id to c._id
+                    <option key={c._id} value={c._id}>
                       {c.name} {c.contact ? `(${c.contact})` : ''}
                     </option>
                   ))}
@@ -851,7 +860,7 @@ const BillingSystem = () => {
                               </div>
                             ) : (
                               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                <span className="price">{formatCurrency(item.price)}</span>
+                                <span className="price">{formatCurrency(item.selling_price)}</span>
                                 <button
                                   onClick={() => togglePriceEdit(item.id)}
                                   style={{
@@ -873,7 +882,7 @@ const BillingSystem = () => {
                           
                           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <strong style={{ fontSize: '16px' }}>
-                              Total: {formatCurrency(item.price * item.quantity)}
+                              Total: {formatCurrency(item.selling_price * item.quantity)}
                             </strong>
                             <button 
                               onClick={() => removeFromCart(item.id)}
@@ -1093,9 +1102,19 @@ const BillingSystem = () => {
               <div className="bill-header-info">
                 <div className="customer-info">
                   <h4>👤 Customer Details</h4>
-                  <p><strong>Name:</strong> {customers.find(c => c.id === Number(customerId))?.name || ''}</p>
+                  {/* <p><strong>Name:</strong> {customers.find(c => c.id === Number(customerId))?.name || ''}</p>
                   <p><strong>Contact:</strong> {customers.find(c => c.id === Number(customerId))?.contact || 'N/A'}</p>
-                  <p><strong>Payment:</strong> {paymentMethod}</p>
+                  <p><strong>Payment:</strong> {paymentMethod}</p> */}
+                  {(() => {
+                      const customer = customers.find(c => c._id === customerId);
+                      return (
+                        <>
+                          <p><strong>Name:</strong> {customer?.name || 'N/A'}</p>
+                          <p><strong>Contact:</strong> {customer?.contact || 'N/A'}</p>
+                          <p><strong>Payment:</strong> {paymentMethod}</p>
+                        </>
+                      );
+                    })()}
                 </div>
                 <div className="bill-info">
                   <h4>📋 Bill Details</h4>
